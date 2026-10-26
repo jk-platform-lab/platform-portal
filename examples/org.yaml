@@ -1,0 +1,17 @@
+---
+apiVersion: backstage.io/v1alpha1
+kind: Group
+metadata:
+  name: platform-team
+spec:
+  type: team
+  children: []
+---
+apiVersion: backstage.io/v1alpha1
+kind: User
+metadata:
+  name: JayKearney
+  annotations:
+    github.com/user-id: 'MDQ6VXNlcjgwNzg0MzQw'
+spec:
+  memberOf: [platform-team]

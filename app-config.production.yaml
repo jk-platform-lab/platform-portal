@@ -1,0 +1,53 @@
+app:
+  # The backend serves the built frontend, so both use the same address
+  baseUrl: http://localhost:7007
+
+backend:
+  baseUrl: http://localhost:7007
+  listen:
+    port: 7007
+    host: 0.0.0.0
+  database:
+    client: pg
+    connection:
+      host: ${POSTGRES_HOST}
+      port: ${POSTGRES_PORT}
+      user: ${POSTGRES_USER}
+      password: ${POSTGRES_PASSWORD}
+
+auth:
+  environment: production
+  providers:
+    github:
+      production:
+        clientId: ${AUTH_GITHUB_CLIENT_ID}
+        clientSecret: ${AUTH_GITHUB_CLIENT_SECRET}
+        signIn:
+          resolvers:
+            - resolver: userIdMatchingUserEntityAnnotation
+
+techdocs:
+  builder: 'local'
+  generator:
+    runIn: 'local'
+  publisher:
+    type: 'local'
+
+catalog:
+  locations:
+    # Paths are relative to /app in the container
+    - type: file
+      target: ./examples/org.yaml
+      rules:
+        - allow: [User, Group]
+
+    - type: url
+      target: https://github.com/JayKearney/infradoctor/blob/main/catalog-info.yaml
+
+    - type: url
+      target: https://github.com/JayKearney/platform-config/blob/main/catalog-info.yaml
+
+    - type: url
+      target: https://github.com/jk-platform-lab/backstage-templates/blob/main/catalog-info.yaml
+      rules:
+        - allow: [Location, Template, Component]

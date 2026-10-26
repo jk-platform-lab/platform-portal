@@ -1,0 +1,40 @@
+name: platform-portal
+
+services:
+  db:
+    image: postgres:17
+    container_name: backstage-db
+    env_file: ../postgres.env
+    volumes:
+      - backstage-db-data:/var/lib/postgresql/data
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER}"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  backstage:
+    image: platform-portal:0.1.0
+    build:
+      context: .
+      dockerfile: packages/backend/Dockerfile
+    container_name: platform-portal
+    env_file:
+      - ../postgres.env
+      - ../github-auth.env
+    ports:
+      - "7007:7007"
+    depends_on:
+      db:
+        condition: service_healthy
+    restart: unless-stopped
+
+volumes:
+  backstage-db-data:
+    external: true
+
+networks:
+  default:
+    name: backstage-net
+    external: true
