@@ -18,7 +18,7 @@ environment and a VPC range, then creates a GitHub repository with:
 - topics and custom properties (`environment`, `managed-by`) set on the repository
 - TechDocs and a `catalog-info.yaml`, so it appears in the portal with an owner and documentation
 
-![A pull request blocked by the audit](docs/images/blocked-pr.png)
+![infradoctor blocking an overlapping VPC in a pull request](docs/images/audit-log.png)
 
 **Catalog with GitHub discovery.** Every repository in the organization with a `catalog-info.yaml`
 is added automatically, so nobody has to register a new service by hand.
