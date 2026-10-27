@@ -24,7 +24,7 @@ services:
       - ../postgres.env
       - ../github-auth.env
     ports:
-      - "7007:7007"
+      - "127.0.0.1:7007:7007"
     depends_on:
       db:
         condition: service_healthy
