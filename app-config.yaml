@@ -1,5 +1,5 @@
 app:
-  title: Scaffolded Backstage App
+  title: JK Platform Lab
   baseUrl: http://localhost:3000
   listen:
     host: 0.0.0.0
@@ -19,7 +19,7 @@ app:
           path: /
 
 organization:
-  name: My Company
+  name: JK Platform Lab
 
 backend:
   # Used for enabling authentication, secret is shared by all backend plugins
